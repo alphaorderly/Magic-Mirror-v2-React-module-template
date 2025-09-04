@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom module-specific styling (avoid global leakage) */
+.mmm-reactsample-app {
+  @apply text-center text-white font-sans;
+}
+
+.mmm-reactsample-app h2 {
+  @apply text-xl font-semibold m-0;
+}
