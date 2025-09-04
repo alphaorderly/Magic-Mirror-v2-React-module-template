@@ -4,6 +4,26 @@ A MagicMirror² module whose UI is rendered by a React 18 + TypeScript applicati
 
 ---
 
+## Manual Rename (e.g. MMM-ReactSample → MMM-ReactClock)
+
+If you want to base a new module on this one:
+1. Rename directory: `MMM-ReactSample` → `MMM-ReactClock`.
+2. Rename file: `MMM-ReactSample.js` → `MMM-ReactClock.js`.
+3. Inside that file change: `Module.register("MMM-ReactSample", {` → `Module.register("MMM-ReactClock", {`.
+4. In `package.json` update:
+  - `name`: `mmm-reactsample` → `mmm-reactclock`
+  - `main`: `MMM-ReactSample.js` → `MMM-ReactClock.js`
+5. Update README heading / examples.
+6. Update `config/config.js` to use the new module name.
+7. Search all files for `mmm-reactsample` and replace with your new project name (e.g. `mmm-reactclock`). This includes CSS class names, dataset attributes, and any code or documentation references. This ensures consistent naming and avoids conflicts.
+
+Notes:
+- Stopping MagicMirror is usually not required; the UI will reload on next cycle, but if issues occur just restart.
+- Reinstall (`yarn install`) is unnecessary unless you also change dependencies.
+- Rebuild is unnecessary while using the watch build (`yarn dev`). For a fresh production bundle you can still run `yarn build` (optional).
+
+---
+
 ## Features
 
 - React 18 + TypeScript + Vite 5
@@ -21,7 +41,7 @@ A MagicMirror² module whose UI is rendered by a React 18 + TypeScript applicati
 
 Repository: https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template
 
-The repository root IS the module root (no extra nested folder). You have two common options to install:
+The repository root IS the module root (no extra nested folder). You have three common options to install:
 
 Option A – Clone directly with desired module name (recommended):
 ```bash
@@ -38,6 +58,21 @@ git clone https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template.
 cd Magic-Mirror-v2-React-module-template
 # (optional) mv Magic-Mirror-v2-React-module-template MMM-ReactSample
 yarn install
+```
+
+Option C – Develop on separate computer and transfer:
+```bash
+# On development computer
+git clone https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template.git MMM-ReactSample
+cd MMM-ReactSample
+yarn install
+yarn test:dev    # Use standalone testing during development (see Standalone Testing section)
+yarn build       # Build production files when ready
+
+# Transfer entire folder to MagicMirror computer
+# On MagicMirror computer
+mv MMM-ReactSample /path/to/MagicMirror/modules/
+# No need to run yarn install if only using built files
 ```
 
 Custom name? Just replace `MMM-ReactSample` above with your target (ensure it still begins with `MMM-` and update `Module.register(...)` + `config.js`).
@@ -63,7 +98,7 @@ yarn dev    # runs: vite build --watch (outputs to dist/)
 ```
 MagicMirror loads `dist/index.js`. The module polls the file every `updateInterval` ms and reloads the window when the signature changes.
 
-### Standalone Testing (without MagicMirror)
+### Standalone Testing (without MagicMirror) {#standalone-testing}
 
 Test your module independently in a browser without installing it in MagicMirror:
 
@@ -190,26 +225,6 @@ If you rename the module and prefix, the utilities will still work as long as th
 ## Extending with a Node Helper
 
 Add a `node_helper.js` if you need backend logic (APIs, filesystem, scheduling). Use MagicMirror socket notifications to transfer data to the front-end, then integrate with React state (e.g. via a simple event or global store).
-
-## Manual Rename (e.g. MMM-ReactSample → MMM-ReactClock)
-
-If you want to base a new module on this one:
-1. Rename directory: `MMM-ReactSample` → `MMM-ReactClock`.
-2. Rename file: `MMM-ReactSample.js` → `MMM-ReactClock.js`.
-3. Inside that file change: `Module.register("MMM-ReactSample", {` → `Module.register("MMM-ReactClock", {`.
-4. In `package.json` update:
-  - `name`: `mmm-reactsample` → `mmm-reactclock`
-  - `main`: `MMM-ReactSample.js` → `MMM-ReactClock.js`
-5. Update README heading / examples.
-6. Update `config/config.js` to use the new module name.
-
-7. Search all files for `mmm-reactsample` and replace with your new project name (e.g. `mmm-reactclock`). This includes CSS class names, dataset attributes, and any code or documentation references. This ensures consistent naming and avoids conflicts.
-
-Notes:
-- Stopping MagicMirror is usually not required; the UI will reload on next cycle, but if issues occur just restart.
-- Reinstall (`yarn install`) is unnecessary unless you also change dependencies.
-- Rebuild is unnecessary while using the watch build (`yarn dev`). For a fresh production bundle you can still run `yarn build` (optional).
-
 
 ## Troubleshooting
 
