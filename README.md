@@ -148,10 +148,6 @@ const cfg = ensureConfig() ?? { updateInterval: 60000 };
 
 If you rename the module and prefix, the utilities will still work as long as the root keeps the class `mmm-reactweather-root` or you adjust queries inside `config.ts` accordingly.
 
-## Styling
-
-Classes are prefixed with `mmm-reactweather-` to avoid conflicts with other modules. If you clone / rename this module you may also rename the prefix (optional but cleaner).
-
 ## Performance Tips
 
 - Keep rendered component tree small.
@@ -181,7 +177,6 @@ Notes:
 - Reinstall (`yarn install`) is unnecessary unless you also change dependencies.
 - Rebuild is unnecessary while using the watch build (`yarn dev`). For a fresh production bundle you can still run `yarn build` (optional).
 
-If you also want to rename CSS / dataset prefixes (not required), manually search `mmm-reactsample` or `reactsample` and replace—safe to ignore for single instance usage.
 
 ## Troubleshooting
 
