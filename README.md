@@ -63,6 +63,39 @@ yarn dev    # runs: vite build --watch (outputs to dist/)
 ```
 MagicMirror loads `dist/index.js`. The module polls the file every `updateInterval` ms and reloads the window when the signature changes.
 
+### Standalone Testing (without MagicMirror)
+
+Test your module independently in a browser without installing it in MagicMirror:
+
+```bash
+yarn test:dev    # runs: vite --config vite.config.dev.js (opens browser at localhost:3000)
+```
+
+This launches a development server with:
+- Hot module replacement for instant feedback
+- MagicMirror-like styling simulation
+- Mock config data injection for testing config utilities
+- Independent testing environment
+- No interference with existing `yarn dev` or `yarn build` workflows
+
+The test environment includes a mock config object in `index.html` that simulates MagicMirror's config injection:
+```javascript
+const testConfig = {
+    dev: true,
+    updateInterval: 30000,
+    testMode: true,
+    customMessage: "Hello from config!"
+};
+```
+
+You can modify this object to test different config scenarios. The config is automatically injected into the React component via `data-config` attribute, allowing you to test your config utilities (`getConfig()`, `ensureConfig()`, etc.) in isolation.
+
+Additional test commands:
+```bash
+yarn test:build    # Build standalone test version
+yarn test:preview  # Preview built test version
+```
+
 Type checking:
 ```bash
 yarn typecheck

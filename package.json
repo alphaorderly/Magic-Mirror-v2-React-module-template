@@ -5,9 +5,10 @@
   "main": "MMM-ReactSample.js",
   "type": "module",
   "scripts": {
-  "dev": "vite build --watch",        
+    "dev": "vite build --watch",        
     "build": "vite build",
     "preview": "vite preview",
+    "test:dev": "vite --config vite.config.dev.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write ."
