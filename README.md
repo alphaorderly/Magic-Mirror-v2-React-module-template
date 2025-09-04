@@ -19,12 +19,28 @@ A MagicMirror² module whose UI is rendered by a React 18 + TypeScript applicati
 
 ## Installation
 
+Repository: https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template
+
+The repository root IS the module root (no extra nested folder). You have two common options to install:
+
+Option A – Clone directly with desired module name (recommended):
 ```bash
 cd MagicMirror/modules
-# copy or clone this folder
+git clone https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template.git MMM-ReactSample
 cd MMM-ReactSample
 yarn install
 ```
+
+Option B – Clone with original repo name then optionally rename:
+```bash
+cd MagicMirror/modules
+git clone https://github.com/alphaorderly/Magic-Mirror-v2-React-module-template.git
+cd Magic-Mirror-v2-React-module-template
+# (optional) mv Magic-Mirror-v2-React-module-template MMM-ReactSample
+yarn install
+```
+
+Custom name? Just replace `MMM-ReactSample` above with your target (ensure it still begins with `MMM-` and update `Module.register(...)` + `config.js`).
 
 ## Configuration (config/config.js)
 
