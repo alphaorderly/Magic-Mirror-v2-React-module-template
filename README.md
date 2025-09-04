@@ -146,11 +146,11 @@ import { ensureConfig } from './config';
 const cfg = ensureConfig() ?? { updateInterval: 60000 };
 ```
 
-If you rename the module and prefix, the utilities will still work as long as the root keeps the class `mmm-reactsample-root` or you adjust queries inside `config.ts` accordingly.
+If you rename the module and prefix, the utilities will still work as long as the root keeps the class `mmm-reactweather-root` or you adjust queries inside `config.ts` accordingly.
 
 ## Styling
 
-Classes are prefixed with `mmm-reactsample-` to avoid conflicts with other modules. If you clone / rename this module you may also rename the prefix (optional but cleaner).
+Classes are prefixed with `mmm-reactweather-` to avoid conflicts with other modules. If you clone / rename this module you may also rename the prefix (optional but cleaner).
 
 ## Performance Tips
 
@@ -173,6 +173,8 @@ If you want to base a new module on this one:
   - `main`: `MMM-ReactSample.js` → `MMM-ReactClock.js`
 5. Update README heading / examples.
 6. Update `config/config.js` to use the new module name.
+
+7. Search all files for `mmm-reactsample` and replace with your new project name (e.g. `mmm-reactclock`). This includes CSS class names, dataset attributes, and any code or documentation references. This ensures consistent naming and avoids conflicts.
 
 Notes:
 - Stopping MagicMirror is usually not required; the UI will reload on next cycle, but if issues occur just restart.
