@@ -106,6 +106,48 @@ Lower `updateInterval` (e.g. `5000`) for faster feedback.
 | `src/style.css` | Tailwind + module-scoped classes |
 | `dist/` | Build output (generated) |
 
+## Accessing Module Config in React
+
+The MagicMirror module injects its `config` object into the root `<div>` via `data-config` (JSON string). A helper file `src/config.ts` exposes typed utilities:
+
+Exports (preferred names):
+- `ModuleConfig` (interface)
+- `getConfigRoot()` – first root element (`HTMLElement | null`)
+- `getConfig()` – parse current instance config (`ModuleConfig | null`)
+- `ensureConfig()` – cached version of `getConfig()` (returns same object on subsequent calls)
+- `getAllConfigs()` – for multiple module instances on the same page
+
+### Single Instance Example (`App.tsx`)
+```ts
+import { ensureConfig } from './config';
+
+const cfg = ensureConfig() || {};
+// Example usage
+const isDev = !!cfg.dev;
+```
+
+### Direct (non‑cached) Access
+```ts
+import { getConfig } from './config';
+const cfg = getConfig(); // parses each call
+```
+
+### Multiple Instances
+```ts
+import { getAllConfigs } from './config';
+getAllConfigs().forEach(({ root, config }) => {
+  console.log('Instance root id:', root.id, 'config:', config);
+});
+```
+
+### Defensive Fallback
+```ts
+import { ensureConfig } from './config';
+const cfg = ensureConfig() ?? { updateInterval: 60000 };
+```
+
+If you rename the module and prefix, the utilities will still work as long as the root keeps the class `mmm-reactsample-root` or you adjust queries inside `config.ts` accordingly.
+
 ## Styling
 
 Classes are prefixed with `mmm-reactsample-` to avoid conflicts with other modules. If you clone / rename this module you may also rename the prefix (optional but cleaner).

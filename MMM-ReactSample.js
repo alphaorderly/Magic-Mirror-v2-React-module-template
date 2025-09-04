@@ -65,6 +65,14 @@ Module.register("MMM-ReactSample", {
     const root = document.createElement("div");
     root.id = rootId;
     root.className = "mmm-reactsample-root";
+    // Expose module config to React via data attribute
+    try {
+      root.dataset.config = JSON.stringify(this.config || {});
+    } catch (e) {
+      // Fallback: minimal safe string
+      root.dataset.config = '{}';
+      Log.error("[MMM-ReactSample] Failed to stringify config", e);
+    }
     // Placeholder to visualize before React mounts
     root.innerHTML = '<div style="color:#888;font-size:12px;">[MMM-ReactSample] Mounting...</div>';
     wrapper.appendChild(root);
