@@ -44,11 +44,11 @@ jobs:
 
       - name: Package release zip
         run: |
-          MODULE_NAME=MMM-ReactSample
+          MODULE_NAME=$(jq -r .name package.json)
           VERSION=${GITHUB_REF_NAME}
           RELEASE_DIR=release/${MODULE_NAME}-${VERSION}
           mkdir -p ${RELEASE_DIR}
-          cp MMM-ReactSample.js README.md package.json yarn.lock ${RELEASE_DIR}/
+          cp ${MODULE_NAME}.js README.md package.json yarn.lock ${RELEASE_DIR}/
           [ -f LICENSE ] && cp LICENSE ${RELEASE_DIR}/ || true
           cp -R dist ${RELEASE_DIR}/dist
           (cd release && zip -r ../${MODULE_NAME}-${VERSION}.zip ${MODULE_NAME}-${VERSION})
