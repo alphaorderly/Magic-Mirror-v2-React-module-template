@@ -4,6 +4,8 @@ A MagicMirror² module whose UI is rendered by a React 18 + TypeScript applicati
 
 ---
 
+# REMOVE .git BEFORE START PROJECT
+
 ## Manual Rename (e.g. MMM-ReactSample → MMM-ReactClock)
 
 If you want to base a new module on this one:
