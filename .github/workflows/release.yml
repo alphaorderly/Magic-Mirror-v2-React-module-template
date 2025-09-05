@@ -52,14 +52,14 @@ jobs:
           cp ${MAIN_FILE} README.md package.json yarn.lock ${RELEASE_DIR}/
           [ -f LICENSE ] && cp LICENSE ${RELEASE_DIR}/ || true
           cp -R dist ${RELEASE_DIR}/dist
-          (cd release && zip -r ../${MODULE_NAME}-${VERSION}.zip ${MODULE_NAME}-${VERSION})
+          (cd release && zip -r ${MODULE_NAME}-${VERSION}.zip ${MODULE_NAME}-${VERSION})
           echo "ZIP_NAME=${MODULE_NAME}-${VERSION}.zip" >> $GITHUB_ENV
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: built-module
-          path: MMM-ReactSample-*.zip
+          path: release/*.zip
           if-no-files-found: error
 
       - name: Create GitHub Release
@@ -70,6 +70,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            MMM-ReactSample-${{ github.ref_name }}.zip
+            release/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
