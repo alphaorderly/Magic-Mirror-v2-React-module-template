@@ -1,16 +1,18 @@
 /**
- * Utility helpers for the MagicMirror MMM-ReactSample front-end.
+ * Utility helpers for the MagicMirror mmm-reactclock front-end.
  * Provides typed access to the injected root element and its serialized config.
  */
 
 export interface ModuleConfig {
   updateInterval?: number;
   dev?: boolean;
+  primary: string;
+  others?: string[];
   [key: string]: unknown;
 }
 
 export function getConfigRoot(): HTMLElement | null {
-  const collection = document.getElementsByClassName('mmm-reactsample-root');
+  const collection = document.getElementsByClassName("mmm-reactclock-root");
   const el = collection[0];
   return el instanceof HTMLElement ? el : null;
 }
@@ -23,19 +25,27 @@ export function getConfig(): ModuleConfig | null {
   try {
     return JSON.parse(raw) as ModuleConfig;
   } catch (e) {
-    console.error('[MMM-ReactSample] Failed to parse data-config JSON', e);
+    console.error("[mmm-reactclock] Failed to parse data-config JSON", e);
     return null;
   }
 }
 
-export function getAllConfigs(): Array<{ root: HTMLElement; config: ModuleConfig | null }> {
-  const roots = Array.from(document.getElementsByClassName('mmm-reactsample-root'))
-    .filter((el): el is HTMLElement => el instanceof HTMLElement);
-  return roots.map(root => {
+export function getAllConfigs(): Array<{
+  root: HTMLElement;
+  config: ModuleConfig | null;
+}> {
+  const roots = Array.from(document.getElementsByClassName("mmm-reactclock-root")).filter(
+    (el): el is HTMLElement => el instanceof HTMLElement,
+  );
+  return roots.map((root) => {
     let parsed: ModuleConfig | null = null;
     const raw = root.dataset?.config;
     if (raw) {
-      try { parsed = JSON.parse(raw) as ModuleConfig; } catch { /* ignore */ }
+      try {
+        parsed = JSON.parse(raw) as ModuleConfig;
+      } catch {
+        /* ignore */
+      }
     }
     return { root, config: parsed };
   });

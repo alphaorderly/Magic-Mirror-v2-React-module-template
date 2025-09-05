@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import { ensureConfig } from "./config";
+import useTime from "./hooks/useTime";
+import MainClock from "./MainClock";
+import WorldClocks from "./WorldClocks";
 
 export default function App(): JSX.Element {
-  const [now, setNow] = useState<Date>(() => new Date());
-  const config = ensureConfig();
+    const config = ensureConfig();
 
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
+    const { currentTime, otherTimes } = useTime({
+        primaryTz: config?.primary ?? "UTC",
+        otherTzs: config?.others ?? [],
+    });
 
-  return (
-    <div className="mmm-reactsample-app space-y-1">
-      <h2>React Sample</h2>
-      <p className="text-lg tracking-wide">{now.toLocaleTimeString()}</p>
-      
-      {config && (
-        <div className="mt-4 text-sm opacity-75">
-          <div>Dev Mode: {config.dev ? 'ON' : 'OFF'}</div>
-          <div>Update Interval: {config.updateInterval}ms</div>
-          {typeof config.customMessage === 'string' && <div>Message: {config.customMessage}</div>}
-          {!!config.testMode && <div>🧪 Test Mode Active</div>}
+    return (
+        <div className="flex flex-col items-start p-4">
+            <MainClock time={currentTime} />
+            <WorldClocks
+                times={otherTimes}
+                tzNames={config?.others ?? []}
+                primaryTime={currentTime}
+            />
         </div>
-      )}
-    </div>
-  );
+    );
 }

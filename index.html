@@ -1,103 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MagicMirror Module Test - ReactSample</title>
     <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: "Roboto Condensed", sans-serif;
-            background-color: #000;
-            color: #aaa;
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-        
-        .mmm-reactsample-root {
-            display: block;
-        }
-        
-        .mmm-reactsample-app {
-            text-align: center;
-        }
-        
-        .mmm-reactsample-app h2 {
-            color: #fff;
-            font-size: 24px;
-            margin: 0 0 10px 0;
-        }
-        
-        .mmm-reactsample-app p {
-            margin: 5px 0;
-        }
-        
-        /* MagicMirror 스타일 시뮬레이션 */
-        .magic-mirror-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .module-header {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: "Roboto Condensed", sans-serif;
+        background-color: #000;
+        color: #aaa;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
 
-        .config-info {
-            background: #222;
-            border: 1px solid #444;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #999;
-            font-family: 'Courier New', monospace;
-        }
+      .mmm-reactclock-root {
+        display: block;
+      }
 
-        .config-info .config-label {
-            color: #66cc66;
-            font-weight: bold;
-        }
+      .mmm-reactclock-app {
+        text-align: center;
+      }
+
+      .mmm-reactclock-app h2 {
+        color: #fff;
+        font-size: 24px;
+        margin: 0 0 10px 0;
+      }
+
+      .mmm-reactclock-app p {
+        margin: 5px 0;
+      }
+
+      /* MagicMirror 스타일 시뮬레이션 */
+      .magic-mirror-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .module-header {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .config-info {
+        background: #222;
+        border: 1px solid #444;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #999;
+        font-family: "Courier New", monospace;
+      }
+
+      .config-info .config-label {
+        color: #66cc66;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="magic-mirror-container">
-        <div class="module-header">
-            🪞 MagicMirror Module Test Environment
-        </div>
-        <div class="config-info">
-            <span class="config-label">📋 Test Config:</span>
-            <span id="config-display"></span>
-        </div>
-        <div class="mmm-reactsample-root"></div>
+      <div class="module-header">🪞 MagicMirror Module Test Environment</div>
+      <div class="config-info">
+        <span class="config-label">📋 Test Config:</span>
+        <span id="config-display"></span>
+      </div>
+      <div class="mmm-reactclock-root"></div>
     </div>
 
     <script>
-        const testConfig = {
-            dev: true,
-            updateInterval: 30000,
-            testMode: true,
-            customMessage: "Hello from config!"
-        };
+      const testConfig = {
+        dev: true,
+        updateInterval: 30000,
+        primary: "Asia/Seoul",
+        others: ["America/New_York", "Europe/London", "Asia/Tokyo"],
+      };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const root = document.querySelector('.mmm-reactsample-root');
-            if (root) {
-                root.dataset.config = JSON.stringify(testConfig);
-            }
+      document.addEventListener("DOMContentLoaded", function () {
+        const root = document.querySelector(".mmm-reactclock-root");
+        if (root) {
+          root.dataset.config = JSON.stringify(testConfig);
+        }
 
-            const configDisplay = document.getElementById('config-display');
-            if (configDisplay) {
-                configDisplay.textContent = JSON.stringify(testConfig, null, 2);
-            }
-        });
+        const configDisplay = document.getElementById("config-display");
+        if (configDisplay) {
+          configDisplay.textContent = JSON.stringify(testConfig, null, 2);
+        }
+      });
     </script>
 
     <script type="module" src="/src/main.tsx"></script>
-</body>
+  </body>
 </html>

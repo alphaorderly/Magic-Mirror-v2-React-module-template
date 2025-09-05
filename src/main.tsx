@@ -7,7 +7,7 @@ let root: Root | null = null;
 
 function mount() {
   const container = document.querySelector<HTMLDivElement>(
-    ".mmm-reactsample-root"
+    ".mmm-reactclock-root"
   );
   if (!container) return;
   if (container.dataset.mounted) return;

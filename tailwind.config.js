@@ -2,7 +2,7 @@
 export default {
   content: [
     './index.html',
-    './MMM-ReactSample.js',
+    './mmm-reactclock.js',
     './src/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
