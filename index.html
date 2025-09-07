@@ -40,40 +40,10 @@
             margin: 0 auto;
             padding: 20px;
         }
-        
-        .module-header {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .config-info {
-            background: #222;
-            border: 1px solid #444;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #999;
-            font-family: 'Courier New', monospace;
-        }
-
-        .config-info .config-label {
-            color: #66cc66;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
     <div class="magic-mirror-container">
-        <div class="module-header">
-            🪞 MagicMirror Module Test Environment
-        </div>
-        <div class="config-info">
-            <span class="config-label">📋 Test Config:</span>
-            <span id="config-display"></span>
-        </div>
         <div class="mmm-reactsample-root"></div>
     </div>
 
@@ -86,14 +56,13 @@
         };
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Console에 테스트 환경 정보 출력
+            console.log('🪞 MagicMirror Module Test Environment');
+            console.log('📋 Test Config:', testConfig);
+            
             const root = document.querySelector('.mmm-reactsample-root');
             if (root) {
                 root.dataset.config = JSON.stringify(testConfig);
-            }
-
-            const configDisplay = document.getElementById('config-display');
-            if (configDisplay) {
-                configDisplay.textContent = JSON.stringify(testConfig, null, 2);
             }
         });
     </script>
